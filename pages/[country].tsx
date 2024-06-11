@@ -1,23 +1,23 @@
-import { useMemo, useState } from 'react'
-import type { GetStaticPaths, GetStaticProps } from 'next'
-import Image from 'next/image'
-import type { ParsedUrlQuery } from 'querystring'
-import { Layout } from '@vercel/examples-ui'
+import { useMemo, useState } from "react";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import Image from "next/image";
+import type { ParsedUrlQuery } from "querystring";
+import { Layout } from "@vercel/examples-ui";
 
-import type { Country } from '../types'
-import shirt from '../public/shirt.png'
-import map from '../public/map.svg'
-import api from '../api'
-import { PRODUCT_PRICE } from '../constants'
-import { getParityPrice } from '../utils'
+import type { Country } from "../types";
+import shirt from "../public/shirt.png";
+import map from "../public/map.svg";
+import api from "../api";
+import { PRODUCT_PRICE } from "../constants";
+import { getParityPrice } from "../utils";
 
 interface Params extends ParsedUrlQuery {
-  country: Country
+  country: Country;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the list of countries
-  const countries = await api.parity.list()
+  const countries = await api.parity.list();
 
   return {
     paths: countries.map((country) => ({
@@ -25,30 +25,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
         country,
       },
     })),
-    fallback: 'blocking',
-  }
-}
+    fallback: "blocking",
+  };
+};
 
 export const getStaticProps: GetStaticProps<unknown, Params> = async ({
   params,
 }) => {
   // Get parity for country
-  const parity = await api.parity.fetch(params.country)
+  const parity = await api.parity.fetch(params.country);
 
   return {
     props: {
       country: params.country,
       parity,
     },
-  }
-}
+  };
+};
 
 export default function CountryPage({ country, parity }) {
-  const [isParityEnabled, toggleParity] = useState<boolean>(false)
+  const [isParityEnabled, toggleParity] = useState<boolean>(false);
   const parityPrice = useMemo(
     () => getParityPrice(PRODUCT_PRICE, parity),
     [parity]
-  )
+  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-10 bg-gray-50">
@@ -62,7 +62,7 @@ export default function CountryPage({ country, parity }) {
         />
       </div>
       <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center z-10 sm:pt-10">
-        <h1 className="text-3xl sm:text-5xl font-bold">Power parity pricing</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold">TVY</h1>
         <p className="mt-4 sm:text-xl text-lg text-gray-700">
           Show localized pricing based on location headers
         </p>
@@ -156,7 +156,7 @@ export default function CountryPage({ country, parity }) {
         </section>
       </main>
     </div>
-  )
+  );
 }
 
 // CountryPage.Layout = Layout
