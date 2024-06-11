@@ -159,4 +159,4 @@ export default function CountryPage({ country, parity }) {
   )
 }
 
-CountryPage.Layout = Layout
+// CountryPage.Layout = Layout
