@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps, Metadata } from "next";
 import Image from "next/image";
 import type { ParsedUrlQuery } from "querystring";
 import { Layout } from "@vercel/examples-ui";
@@ -41,6 +41,14 @@ export const getStaticProps: GetStaticProps<unknown, Params> = async ({
       parity,
     },
   };
+};
+
+export const metadata: Metadata = {
+  title: "Country Page",
+  description: "Country Page Description",
+  other: {
+    "google-adsense-account": "ca-pub-5058491449778369",
+  },
 };
 
 export default function CountryPage({ country, parity }) {
