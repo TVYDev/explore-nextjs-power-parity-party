@@ -10,6 +10,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
       <Script
         async
         id="adsbygoogle-init"
